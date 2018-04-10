@@ -1,0 +1,46 @@
+Hello all,
+ 
+please find attached a few files you will find useful for starting the work on the Reims tram use case.
+Please let me know if you received this email, since the attachment is relatively large.
+ 
+- 170830.csv is the standard data file you can start to use. Apparently the final data format could still be a bit different (as for example for the sampling time), but this should be close it.  Columns up to CH20 are those important for us, the additional columns have no   
+   interest for the IN2DREAMS project.
+- REIMS_DATA.csv is an older data file already processed by Jean-Francois. Therefore, the calibration on the different columns has been already applied (following the Calibration.png table) and the columns beyond CH20 are the results of computation from the 
+   previous columns. I found this file useful to verify the result of the calculations based on the energy consumption formulas (from the pdf below). But this is not the standard file for our project. Notice also that in this file there is a mistake on the final values of the   
+   longitude and latitude columns, as the correction of the longitude channel has been applied to the latitude raw data and viceversa.
+- DID0003039187_Plan instrumentation - Diagnostic énergétique Citadis 302 Reims_C0.pdf provides a short description of the data acquisition and of the different measured signals, together with some formulas to evaluate the energy consumptions.
+   Unfortunately the document is in French… but please have a look anyway into it (some things I guess can be easily understood anyway) and we will go through it during the confcall tomorrow.
+- Calibration.png contains a table where for the different channels it is indicated what are the corrections/offsets to apply. Depending on the channel, these corrections are due to the instrumentation and the technique   
+   how the data were acquired or stored (for example for longitude, latitude, CO2 level) or to the precision of the instrumentation (for example for the different offsets). 
+   Notice that for each channel were it is necessary, the offset is calculated as the average of the channel value during the first 20-30 seconds (i.e. when the tram is starting up and before the readings reach the regime values). Because of that and because of some 
+   automatic testing performed at the beginning of the data taking for some channels (for example for the speed (“Vitesse”) channel) it is also important to discard from the further analysis the first minute of data.
+- Map_tramway_reims.png containing the map of the Reims tram line we work on.
+ 
+Here is a list of the most important channels and the measured quantities:
+  CH1, "TA_EXT_113” = external temperature in degrees Celsius
+  CH2, "TA_INT” = internal tram temperature in degrees Celsius
+  CH3, "LONGITUDE" = longitude of the tram position. It will be in degrees units after applying the calibration relation.
+  CH4, "LATITUDE" = latitude of the tram position. It will be in degrees units after applying the calibration relation.
+  CH5, "P_Diff" = filter pressure drop in the HVAC system (not interesting for us)
+  CH6, "VITESSE" = tram speed in km/h
+  CH7, "I_HVAC_AC1" = DC current 1 of the Heating, Ventilation and Air-Conditioning system in A units
+  CH8, "I_TCU2" = traction current in A units
+  CH10, "CO2" = CO2 level inside the tram to have a rough estimate of the passenger number. In ppm units once the correction applied.
+  CH11, "I_RHEO_22" = rheostat current 2 at the roof panel 2 in A units
+  CH12, "I_RHEO_21" = rheostat current 2 at the roof panel 1 in A units
+  CH13, "I_RHEO_12” = rheostat current 1 at the roof panel 2 in A units
+  CH14, "I_RHEO_11" = rheostat current 1 at the roof panel 1 in A units
+  CH15, "U_CTPP" = indicates whether the power comes from the overhead line (“catenaire” in French) when > 12V or from the third rail on the ground (“alimentation par le sol = APS” in French) when <12V
+                                       Notice that indeed the Reims tramway is mostly powered through the overhead line except for the central part of the route (in the city centre) where it is powered for about 2 km through the third rail (see the Map_tramway_reims.png). 
+  CH16, "I_CAT" = overhead line current in A units. Notice that during traction I_CAT < 0 (consumed energy) while when I_CAT > 0 the energy is recovered from the braking. 
+  CH17, "U_CAT" = overhead line voltage in V units
+  CH18, "I_CVS" = power converter current in A units
+  CH19, "U_HVAC_AC” = voltage of the Heating, Ventilation and Air-Conditioning system in V units
+  CH20, "I_HVAC_AC2" = DC current 2 of the Heating, Ventilation and Air-Conditioning system in A units
+ 
+I hope this gives you already a first idea and we can then discuss tomorrow in more detail.
+ 
+Best regards,
+ 
+      Simona
+ 
